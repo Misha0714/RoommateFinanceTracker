@@ -78,9 +78,9 @@ MUI
 
 Documentation of this library can be found [here](https://mui.com/material-ui/)
 
-**Note: As of currently Nov 19th, only Material-UI Library is in usage in the project (Not JoyUI or Base UI). If there is a switch, let the team know and update the dependencies.**
+**Note: As of currently Nov 22nd, only Material-UI and MUIx Charts Library is in usage in the project (Not JoyUI or Base UI). If there is a switch, let the team know and update the dependencies.**
 
-`npm install @mui/material @emotion/react @emotion/styled`
+`npm install @mui/material @mui/x-charts @mui/@emotion/react @emotion/styled`
 
 MUI Icon Library 
 

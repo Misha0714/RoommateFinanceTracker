@@ -9,7 +9,7 @@ const data = [
     { id: 'id_C', value: 20, label: 'Series C' },
 ]
 
-// BudgetSummary Component
+// Author Ford C. (napip03)
 function BudgetSummary({ remainingBudget, currentExpenses }) {
     const items = [
         { id: 'id_A', value: 10, label: 'Series A' },

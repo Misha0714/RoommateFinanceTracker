@@ -1,14 +1,18 @@
 import emailjs from '@emailjs/browser';
 
-const sendEmail = (e, form) => {
-    e.preventDefault();
+const sendEmail = (message) => {
+    const userID = '12345';
+    
+    // Data object containing variables for the email template
+    const templateParams = {
+        message: message,
+    };
 
     emailjs
-        .sendForm('service_ir6o99o', 'template_a7qrcdl', form.current, 'R8Suz9o57NTK5a2s9')
+        .send('service_ir6o99o', 'template_a7qrcdl', templateParams, 'R8Suz9o57NTK5a2s9')
         .then(
             (result) => {
                 console.log(result.text);
-                e.target.reset(); 
                 alert('Email sent');
             },
             (error) => {

@@ -41,7 +41,6 @@ function LandingPage() {
             <Link to="/dashboard" style={{ 
               textDecoration: "none", 
               color: "white", 
-              width: "100%"
               }}>
               <Button 
                 variant="contained"
@@ -51,15 +50,13 @@ function LandingPage() {
                   padding: '20px 20px',
                   fontSize: '1rem',
                   fontFamily: 'Libre Baskerville, serif', 
-                  width: "100%"
                 }}
-                onClick={() => alert('Button 1 clicked!')}
               >
                 Utilize our Budgeting And Expense-Splitting Dashboard
               </Button>
             </Link>
             
-            <Link to="/blog" style={{ textDecoration: "none", color: "#333", width: "100%" }}>
+            <Link to="/blog" style={{ textDecoration: "none", width: "100%" }}>
               <Button 
                 variant="outlined"
                 sx={{ 
@@ -68,8 +65,9 @@ function LandingPage() {
                   padding: '20px 20px',
                   fontSize: '1rem',
                   fontFamily: 'Libre Baskerville, serif', 
+                  width: "100%",
+                  color: "black"
                 }}
-                onClick={() => alert('Button 2 clicked!')}
               >
                 See our Budgeting Tips!
               </Button>

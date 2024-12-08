@@ -17,7 +17,7 @@ const NavBar = () => {
 
           {/* Center: Title */}
           <Box sx={{ flexGrow: 1, textAlign: "center" }}>
-            <Typography variant="h4" component="div" sx={{ fontWeight: "bold" }}>
+            <Typography variant="h4" component="div" sx={{ fontWeight: "bold", marginLeft: "10rem" }}>
               Brainpower
             </Typography>
           </Box>

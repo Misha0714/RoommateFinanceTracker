@@ -72,7 +72,7 @@ public class Payment {
         this.amount = amount;
     }
 
-    // instead of due date with payment, I moved due date to the 
+    // instead of due date with payment
     public LocalDate getPaymentDate() {
         return paymentDate;
     }

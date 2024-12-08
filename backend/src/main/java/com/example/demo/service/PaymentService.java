@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Payment;
+import com.example.user.User;
 import com.example.demo.model.Expense;
 import com.example.demo.repository.PaymentRepository;
 import com.example.demo.repository.ExpenseRepository;
@@ -15,25 +16,22 @@ import java.math.BigDecimal;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final ExpenseRepository expenseRepository;
-   // private final UserService userService;
+   private final User user;
 
     @Autowired
-   // public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository, UserService userService) {
-    public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository) {
+    public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository, User user) {
+   // public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository) {
         this.paymentRepository = paymentRepository;
         this.expenseRepository = expenseRepository;
-       // this.userService = userService;
+      this.user = user;
     }
 
- 
     
     // payment should take in amount and expenseId
     
     public Payment createPayment(Payment payment) {
         // Set current user as payer
-    	payment.setPayerId(userService.getCurrentUserId());
-    	
-    	//payment.setRecipientId(); will get from expense id from front end
+    	payment.setPayerId(User.getId());
     	
     	
         // Set payment date to now
@@ -71,7 +69,7 @@ public class PaymentService {
             remainingAmount = BigDecimal.ZERO;
         }
         
-        // Update expense amount and settlement status
+        // Update expense amount + settlement status
         expense.setAmount(remainingAmount);
         
         // If remaining amount is zero, mark as settled

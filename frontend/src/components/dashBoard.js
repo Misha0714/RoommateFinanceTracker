@@ -40,17 +40,24 @@ function DashBoard(){
                 flexGrow: 1,
                 display: "flex",
                 flexDirection: "column",
-                width: "3fr"
             }}>
                 <Box sx={{
                     color: "#283c7d",
                     fontWeight: "bold",
                     fontSize: "1.5rem",
                     padding: "1rem 0rem",
+                    textAlign: "center"
                 }}>Transactions Dashboard</Box>
                 <BudgetSummary />
                 <ActivityLog />
-                <ModalForm />
+                <Box sx={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <ModalForm/>
+                </Box>
             </Box>
         </Box>
     );

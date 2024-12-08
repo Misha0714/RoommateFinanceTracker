@@ -53,20 +53,7 @@ public class ExpenseController {
         return ResponseEntity.ok().build();
     }
     
-    
-    @GetMapping("/test/regular")
-    public ResponseEntity<Expense> testCreateRegularExpense() {
-        Expense expense = new Expense();
-        expense.setGroupId(1L);
-        expense.setPayerId(2L);
-        expense.setAmount(new BigDecimal("100.50"));
-        expense.setDescription("Test Regular Expense");
-        expense.setCategory("Test");
-        expense.setDueDate(LocalDate.now().plusDays(7));
-  
-        
-        return ResponseEntity.ok(expenseService.createExpense(expense));
-    }
+
 
 
 }

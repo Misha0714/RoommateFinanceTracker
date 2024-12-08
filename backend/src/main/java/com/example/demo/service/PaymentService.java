@@ -31,9 +31,7 @@ public class PaymentService {
     
     public Payment createPayment(Payment payment) {
         // Set current user as payer
-    	payment.setPayerId(User.getId());
-    	
-    	
+    	payment.setPayerId(User.getId());  	
         // Set payment date to now
         payment.setPaymentDate(LocalDate.now());
         

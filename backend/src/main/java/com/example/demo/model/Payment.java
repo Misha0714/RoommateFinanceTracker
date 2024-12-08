@@ -17,8 +17,6 @@ public class Payment {
     @Column(name = "payer_id")
     private Long payerId;
     
-    @Column(name = "recipient_id")
-    private Long reciepientId;
 
     @Column(nullable = false)
     private BigDecimal amount;
@@ -50,15 +48,6 @@ public class Payment {
     }
 
     public void setPayerId(Long payerId) {
-        this.payerId = payerId;
-    }
-    
-    // will link with logged in user
-    public Long getRecipientId() {
-        return payerId;
-    }
-
-    public void setRecipientId(Long payerId) {
         this.payerId = payerId;
     }
     

@@ -13,7 +13,7 @@ import DashBoard from "./components/dashBoard";
 import Roster from "./components/roster";
 import LandingPage from "./LandingPage/LandingPage"
 import ArticlePage from "./ArticlePage/ArticlePage"
-import { Duo } from "@mui/icons-material";
+import { Dashboard, Duo } from "@mui/icons-material";
 
 import SigninPage from "./signin/signinPage";
 import SignupPage from "./signup/signupPage";

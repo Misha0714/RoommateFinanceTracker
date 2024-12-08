@@ -49,8 +49,22 @@ function DashBoard(){
                     padding: "1rem 0rem",
                     textAlign: "center"
                 }}>Transactions Dashboard</Box>
-                <BudgetSummary />
-                <Roster />
+
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    padding: 2,
+                    width: "100%"
+                }}
+                >
+                    <Box sx={{ flex: 2, padding: 2 }}>
+                        <BudgetSummary remainingBudget={50} currentExpenses={20} />
+                    </Box>
+                    <Box sx={{ flex: 1, padding: 2 }}>
+                        <Roster />
+          </Box>
+                </Box>
+                
                 <ActivityLog />
                 <Box sx={{
                     width: "100%",

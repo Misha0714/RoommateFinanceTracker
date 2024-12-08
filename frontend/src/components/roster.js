@@ -28,7 +28,7 @@ const Roster = () => {
         </Typography>
         <Box
           sx={{
-            maxHeight: 400, // Set max height for scrollable effect
+            maxHeight: 180, // Set max height for scrollable effect
             overflowY: 'auto',
             border: '1px solid #ddd',
             borderRadius: 2,

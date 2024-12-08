@@ -35,7 +35,7 @@ const Footer = () => {
             Blog
           </Link>
           {' | '}
-          <Link href="/login" color="inherit">
+          <Link href="/signin" color="inherit">
             Login 
           </Link>
         </Typography>

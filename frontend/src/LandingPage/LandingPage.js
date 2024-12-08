@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Box, Button, Container } from '@mui/material';
 import { Typography } from '@mui/material';
 import backgroundImage from '../images/background.jpg'; 
@@ -36,35 +37,42 @@ function LandingPage() {
             Manage Your Finances With Others Easily! 
           </Typography>
           {/* Buttons */}
-        <Box sx={{ display: 'flex', gap: 3, mt: 2, flexDirection: 'column', paddingTop: '40px'}}>
-          <Button 
-            variant="contained"
-            sx={{ 
-              backgroundColor: '#433B6B',
-              color: 'white',
-              padding: '20px 20px',
-              fontSize: '1rem',
-              fontFamily: 'Libre Baskerville, serif', 
-            }}
-            onClick={() => alert('Button 1 clicked!')}
-          >
-           Utilize out Budgeting And Expense-Splitting Dashboard
-          </Button>
-          
-          <Button 
-            variant="outlined"
-            sx={{ 
-              backgroundColor: 'white',
-              borderColor: 'white',
-              padding: '20px 20px',
-              fontSize: '1rem',
-              fontFamily: 'Libre Baskerville, serif', 
-            }}
-            onClick={() => alert('Button 2 clicked!')}
-          >
-            See our Budgeting Tips! 
-          </Button>
-        </Box>
+          <Box sx={{ display: 'flex', gap: 3, mt: 2, flexDirection: 'column', paddingTop: '40px', alignItems: "center", justifyContent: "center"}}>
+            <Link to="/dashboard" style={{ 
+              textDecoration: "none", 
+              color: "white", 
+              }}>
+              <Button 
+                variant="contained"
+                sx={{ 
+                  backgroundColor: '#433B6B',
+                  color: 'white',
+                  padding: '20px 20px',
+                  fontSize: '1rem',
+                  fontFamily: 'Libre Baskerville, serif', 
+                }}
+              >
+                Utilize our Budgeting And Expense-Splitting Dashboard
+              </Button>
+            </Link>
+            
+            <Link to="/blog" style={{ textDecoration: "none", width: "100%" }}>
+              <Button 
+                variant="outlined"
+                sx={{ 
+                  backgroundColor: 'white',
+                  borderColor: 'white',
+                  padding: '20px 20px',
+                  fontSize: '1rem',
+                  fontFamily: 'Libre Baskerville, serif', 
+                  width: "100%",
+                  color: "black"
+                }}
+              >
+                See our Budgeting Tips!
+              </Button>
+            </Link>
+          </Box>
         </Box>
       </>
     );

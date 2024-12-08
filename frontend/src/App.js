@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import LoginForm from './components/LoginForm';
 import Footer from './components/footer'
@@ -10,33 +11,26 @@ import ModalForm from "./components/addExpenseForm";
 import DuoLoginForm from "./components/DuoLoginForm";
 import DashBoard from "./components/dashBoard";
 import Roster from "./components/roster";
+import LandingPage from "./LandingPage/LandingPage"
+import ArticlePage from "./ArticlePage/ArticlePage"
 import { Duo } from "@mui/icons-material";
 
-import LandingPage from "./LandingPage/LandingPage";
+import SigninPage from "./signin/signinPage";
+import SignupPage from "./signup/signupPage";
 
 function App() {
   return (
-    <div className="App">
-      <div><Roster/></div>
-      <div><LandingPage/></div>
-      <div>
-        <DashBoard />
-      </div>
-      <div> 
-       <NavBar/>
-      </div>
-      <div>
-        <RegistrationForm/>
-        <LoginForm/>
-      </div>
-        <BudgetSummary/>
-        <ActivityLog/>
-        <ModalForm/>
-      <div>
-    
-      </div>
-      <DuoLoginForm/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<NavBar />}>
+          <Route index element={<LandingPage />} />
+          <Route path="signin" element={<SigninPage />} />
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="dashboard" element={<DashBoard />} />
+          <Route path="blog" element={<ArticlePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

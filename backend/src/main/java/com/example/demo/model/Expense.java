@@ -21,6 +21,9 @@ public class Expense {
     private Long payerId;
 
     @Column(nullable = false)
+    private LocalDate dueDate;
+
+    @Column(nullable = false)
     private BigDecimal amount;
 
     @Column
@@ -65,6 +68,15 @@ public class Expense {
     public void setPayerId(Long payerId) {
         this.payerId = payerId;
     } 
+    
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate date) {
+        this.dueDate = date;
+    }
 
     public BigDecimal getAmount() {
         return amount;

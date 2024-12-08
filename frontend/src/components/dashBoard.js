@@ -4,6 +4,7 @@ import Sidebar from "./sidebar.js";
 import BudgetSummary from "./budgetSummary";
 import ActivityLog from "./activityLog";
 import ModalForm from "./addExpenseForm";
+import Roster from "./roster.js";
 
 function DashBoard(){
     const [username, setUsername] = useState("");
@@ -49,6 +50,7 @@ function DashBoard(){
                     padding: "1rem 0rem",
                 }}>Transactions Dashboard</Box>
                 <BudgetSummary />
+                <Roster />
                 <ActivityLog />
                 <ModalForm />
             </Box>

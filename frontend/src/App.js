@@ -9,7 +9,8 @@ import ActivityLog from "./components/activityLog";
 import RegistrationForm  from "./components/registrationForm"
 import ModalForm from "./components/addExpenseForm";
 import DuoLoginForm from "./components/DuoLoginForm";
-import DashBoard from "./components/dashBoard"
+import DashBoard from "./components/dashBoard";
+import Roster from "./components/roster";
 import LandingPage from "./LandingPage/LandingPage"
 import ArticlePage from "./ArticlePage/ArticlePage"
 import { Duo } from "@mui/icons-material";

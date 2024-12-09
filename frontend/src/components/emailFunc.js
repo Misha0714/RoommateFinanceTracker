@@ -1,12 +1,13 @@
 import emailjs from '@emailjs/browser';
 
-const sendEmail = (message, recipientEmail) => {
+const sendEmail = (message, name, recipientEmail) => {
     const userID = '12345';
     
     // Data object containing variables for the email template
     const templateParams = {
         message: message,
         to_email: recipientEmail,
+        from_name: name,
     };
 
     emailjs

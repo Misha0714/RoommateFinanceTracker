@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Expense;
 import com.example.demo.repository.ExpenseRepository;
 import com.example.user.User;
+import com.example.group.Group;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -31,8 +32,11 @@ public class ExpenseService {
     public Expense createExpense(Expense expense) {
         // Set the current user's ID
         expense.setUserId(User.getId());
+        expense.setGroupId(Group.getId());
         // Ensure new expense is not settled
         expense.setSettled(false);
+        
+        
         return expenseRepository.save(expense);
     }
 

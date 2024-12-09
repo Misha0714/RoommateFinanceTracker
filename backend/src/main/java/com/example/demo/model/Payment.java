@@ -17,8 +17,6 @@ public class Payment {
     @Column(name = "payer_id")
     private Long payerId;
     
-    @Column(name = "recipient_id")
-    private Long reciepientId;
 
     @Column(nullable = false)
     private BigDecimal amount;
@@ -53,15 +51,6 @@ public class Payment {
         this.payerId = payerId;
     }
     
-    // will link with logged in user
-    public Long getRecipientId() {
-        return payerId;
-    }
-
-    public void setRecipientId(Long payerId) {
-        this.payerId = payerId;
-    }
-    
 
     public BigDecimal getAmount() {
         return amount;
@@ -72,7 +61,7 @@ public class Payment {
         this.amount = amount;
     }
 
-    // instead of due date with payment, I moved due date to the 
+    // instead of due date with payment
     public LocalDate getPaymentDate() {
         return paymentDate;
     }

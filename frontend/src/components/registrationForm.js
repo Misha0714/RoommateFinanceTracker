@@ -8,10 +8,13 @@ import {
     Mail as MailIcon,
 } from '@mui/icons-material';
   
-
+//import axios from "axios";
 
 //Author Ford C. (napip03)
 const RegistrationForm = () => {
+  //const [errors, setErrors] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -68,14 +71,49 @@ const RegistrationForm = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted successfully:", formData);
-      // You can make API calls or handle form submission here
-    }
-  };
+      setLoading(true);
+      // make API calls or handle form submission here
+      try {
+        const response = await fetch("http://localhost:8080/api/register" , {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
+        //setSuccessMessage(response.data.message || "Registration successful!");
+        //reset form
+      if (!response.ok)
+      {
+        throw new Error('HTTP error! status: ${response.status}');
+      }
+      const data = await response.json();
+      setSuccessMessage(data.message || "Registration successful!");
 
+        setFormData({
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
+    }
+      catch (err)
+      {
+        console.error('Registration Error', err); 
+      }
+      finally
+      {
+        setLoading(false);
+      }
+  };
+}
   return (
     <Container maxWidth="xs" component="main">
      <Box

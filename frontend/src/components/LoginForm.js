@@ -27,11 +27,46 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  //submit
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add submission logic //make sure that it is intergrated with the backend
-  };
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+    // TODO: Add submission logic // make sure that it is intergrated with the backend
+    const response = await fetch('http://localhost:8080/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Login failed');
+    }
+
+    const data = await response.json();
+    setSuccess(data.message);
+    setUsername('');
+    setPassword('');
+  } 
+  catch (err) 
+  {
+    console.error('Login Error:', err.message);
+    setError(err.message);
+  } 
+  finally 
+  {
+    setLoading(false);
+  }
+
+};
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);

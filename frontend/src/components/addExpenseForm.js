@@ -13,19 +13,21 @@ import {
   Box
 } from '@mui/material';
 
+//import axios from 'axios';
+
 const ModalForm = () => {
   // State to control modal open/close
   const [open, setOpen] = useState(false);
   
-  // State to manage form data
   const [formData, setFormData] = useState({
     name: '',
     amount: '',
     budget: '', 
-    split: ''
+    split: '',
+    dueDate: ''
   });
 
-   // State to track splitting inputs visibility
+   // splitting inputs 
    const [splitAmounts, setSplitAmounts] = useState({
     Person1: '',
     Person2: '',
@@ -38,17 +40,14 @@ const ModalForm = () => {
       [person]: value
     }));
   };
-  // Handle modal open
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  // Handle modal close
   const handleClose = () => {
     setOpen(false);
   };
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -57,12 +56,51 @@ const ModalForm = () => {
     }));
   };
 
-  // Handle form submission
-  const handleSubmit = () => {
+  // handle form submission
+  const handleSubmit = async () => {
     // Perform validation or API call here
-    
-    // Close the modal after submission
-    handleClose();
+    const formattedData = {
+      user: 'username',
+      password: 'password',
+      description: formData.name,
+      category: formData.budget,
+      amount: parseFloat(formData.amount),
+      dueDate: formData.dueDate,
+    };
+      try {
+        const response = await fetch("http://localhost:8080/api/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formattedData),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        console.log("Submission successful:", data);
+  
+        //reset forms
+        setFormData({
+          name: '',
+          amount: '',
+          budget: '',
+          split: '',
+          dueDate: '',
+        });
+        setSplitAmounts({
+          Person1: '',
+          Person2: '',
+          Person3: '',
+        });
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      } finally {
+        handleClose();
+      }
   };
 
   return (

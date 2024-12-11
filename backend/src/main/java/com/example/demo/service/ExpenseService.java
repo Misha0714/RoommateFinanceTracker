@@ -49,6 +49,13 @@ public class ExpenseService {
     public void deleteExpense(Long id) {
         expenseRepository.deleteById(id);
     }
+
+        // Get all expenses where others owe the specified user
+    public List<Expense> getExpensesOwedToUser(Long userId) {
+        return expenseRepository.findByPayerId(userId).stream()
+                .filter(expense -> !expense.isSettled()) // Only include unsettled expenses
+                .collect(Collectors.toList());
+    }
     
 
 }

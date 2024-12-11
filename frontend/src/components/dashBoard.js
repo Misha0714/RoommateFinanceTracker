@@ -5,6 +5,7 @@ import BudgetSummary from "./budgetSummary";
 import ActivityLog from "./activityLog";
 import ModalForm from "./addExpenseForm";
 import Roster from "./roster.js";
+import GroupPage from "./notifyGroup.js";
 
 const initTransactions = [
     { id: 1, account: 'account_63', transaction: 'MetLife', date: 'Jan 13, 2023 12:02 AM', payment_type: 'New Expense', due_date: '1/1/2025', amount_due: 500.00 },
@@ -95,6 +96,21 @@ function DashBoard(){
                     justifyContent: "center",
                 }}>
                     <ModalForm/>
+                </Box>
+
+                <Box sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginBottom: "1rem",
+                }}>
+                    {/* GroupPage button */}
+                    <GroupPage
+                        groupId={1}
+                        userId={123}
+                        username={username}
+                        password={password}
+                    />
                 </Box>
             </Box>
         </Box>

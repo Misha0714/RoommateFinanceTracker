@@ -38,7 +38,7 @@ const LoginPage = () => {
     setSuccess(null);
     try {
     // TODO: Add submission logic // make sure that it is intergrated with the backend
-    const response = await fetch('http://localhost:8080/api/login', {
+    const response = await fetch('http://localhost:8080/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

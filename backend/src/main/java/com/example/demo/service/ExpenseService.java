@@ -15,28 +15,23 @@ import java.util.List;
 @Transactional
 public class ExpenseService {
     private final ExpenseRepository expenseRepository;
-    private final User user;
-   
-   
-    
-    
-    
-    @Autowired
-   public ExpenseService(ExpenseRepository expenseRepository, User user) {
-   // public ExpenseService(ExpenseRepository expenseRepository) {
-        this.expenseRepository = expenseRepository;
-        this.user = user;
-    }
+    private final User currentUser;
+    private final Group currentGroup;
+
 
     
+    @Autowired
+    public ExpenseService(ExpenseRepository expenseRepository, User currentUser, Group currentGroup) {
+        this.expenseRepository = expenseRepository;
+        this.currentUser = currentUser;
+        this.currentGroup = currentGroup;
+    }
+
     public Expense createExpense(Expense expense) {
-        // Set the current user's ID
-        expense.setUserId(User.getId());
-        expense.setGroupId(Group.getId());
-        // Ensure new expense is not settled
+        expense.setUserId(currentUser.getId().longValue());
+        expense.setGroupId(currentGroup.getId().longValue()); 
         expense.setSettled(false);
-        
-        
+
         return expenseRepository.save(expense);
     }
 

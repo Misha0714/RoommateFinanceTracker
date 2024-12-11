@@ -51,13 +51,8 @@ public class ExpenseService {
     }
 
         // Get all expenses where others owe the specified user
-    public List<Expense> getExpensesOwedToUser(Long userId) {
-        return expenseRepository.findByPayerId(userId).stream()
-                .filter(expense -> !expense.isSettled()) // Only include unsettled expenses
-                .collect(Collectors.toList());
-    }
-
-        public Map<String, Double> getAmountsOwedToUserWithEmails(Long userId) {
+    // Get all expenses where others owe the specified user, along with their emails
+    public Map<String, Double> getAmountsOwedToUserWithEmails(Long userId) {
         List<Expense> expenses = expenseRepository.findByPayerId(userId);
 
         // Map to store email -> total amount owed
@@ -65,10 +60,16 @@ public class ExpenseService {
 
         for (Expense expense : expenses) {
             if (!expense.isSettled()) { // Only consider unsettled expenses
-                Optional<User> debtor = UserRepository.findById(expense.getUserId());
-                debtor.ifPresent(user -> {
-                    amountsOwed.put(user.getEmail(), amountsOwed.getOrDefault(user.getEmail(), 0.0) + expense.getAmount().doubleValue());
-                });
+                if (expense.getUserId() != null) {
+                    // Assuming the `User` object can fetch details by ID
+                    if (expense.getUserId().equals(user.getId())) {
+                        String email = user.getEmail();
+                        amountsOwed.put(
+                            email,
+                            amountsOwed.getOrDefault(email, 0.0) + expense.getAmount().doubleValue()
+                        );
+                    }
+                }
             }
         }
 

@@ -16,30 +16,26 @@ import java.math.BigDecimal;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final ExpenseRepository expenseRepository;
-   private final User user;
+    private final User currentUser;  // renamed for clarity
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository, User user) {
-   // public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository) {
+    public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository, User currentUser) {
         this.paymentRepository = paymentRepository;
         this.expenseRepository = expenseRepository;
-      this.user = user;
+        this.currentUser = currentUser;
     }
 
-    
-    // payment should take in amount and expenseId
-    
     public Payment createPayment(Payment payment) {
-        // Set current user as payer
-    	payment.setPayerId(User.getId());  	
+        payment.setPayerId(currentUser.getId().longValue());
+        
         // Set payment date to now
         payment.setPaymentDate(LocalDate.now());
-        
-        
+
         Payment savedPayment = paymentRepository.save(payment);
+       
         // Check and update settlement status
         updateExpenseSettlementStatus(payment.getExpenseId());
-        
+
         return savedPayment;
     }
 
@@ -55,10 +51,12 @@ public class PaymentService {
         BigDecimal totalPaid = allPayments.stream()
             .map(Payment::getAmount)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
+
         
         // Get the expense
         Expense expense = expenseRepository.findById(expenseId)
             .orElseThrow(() -> new RuntimeException("Expense not found"));
+
         
         // Calculate remaining amount
         BigDecimal remainingAmount = expense.getAmount().subtract(totalPaid);

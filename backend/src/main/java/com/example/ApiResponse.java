@@ -5,6 +5,7 @@ import com.example.user.User;
 import com.example.demo.model.Expense;
 
 import java.util.List;
+import java.util.Map;
 
 public class ApiResponse {
     private String message;
@@ -12,6 +13,7 @@ public class ApiResponse {
     private Group group;
     private List<Expense> expenses;
     private Double totalOwed; // New field to store the total amount owed
+    private Map<String, Double> amountsOwed; // New field for email -> amount owed map
 
 
     public ApiResponse(String message, User user) {
@@ -59,7 +61,7 @@ public class ApiResponse {
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
     }
-
+    
     public Double getTotalOwed() {
         return totalOwed;
     }
@@ -67,5 +69,12 @@ public class ApiResponse {
     public void setTotalOwed(Double totalOwed) {
         this.totalOwed = totalOwed;
     }
-}
+    
+    public Map<String, Double> getAmountsOwed() {
+        return amountsOwed;
+    }
 
+    public void setAmountsOwed(Map<String, Double> amountsOwed) {
+        this.amountsOwed = amountsOwed;
+    }
+}

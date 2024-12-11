@@ -4,7 +4,6 @@ import sendEmail from './emailFunc';
 
 const GroupPage = ({ groupId, userId, username, password }) => {
     const handleSendEmails = async () => {
-        setLoading(true);
         try {
             // Fetch group members and their debts from the backend
             const response = await fetch('http://localhost:8080/api/expenses/group', {
@@ -37,7 +36,6 @@ const GroupPage = ({ groupId, userId, username, password }) => {
             console.error('Error sending emails:', error);
             alert('Error sending emails');
         } finally {
-            setLoading(false);
         }
     };
 
@@ -50,7 +48,7 @@ const GroupPage = ({ groupId, userId, username, password }) => {
                 variant="contained"
                 color="primary"
                 onClick={handleSendEmails}
-                style={{ marginTop: 16 }}
+                style={{ marginTop: 5, marginBottom: 10 }}
             >
                 Send Email Notifications
             </Button>

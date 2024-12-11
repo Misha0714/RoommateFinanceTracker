@@ -56,6 +56,24 @@ public class ExpenseService {
                 .filter(expense -> !expense.isSettled()) // Only include unsettled expenses
                 .collect(Collectors.toList());
     }
+
+        public Map<String, Double> getAmountsOwedToUserWithEmails(Long userId) {
+        List<Expense> expenses = expenseRepository.findByPayerId(userId);
+
+        // Map to store email -> total amount owed
+        Map<String, Double> amountsOwed = new HashMap<>();
+
+        for (Expense expense : expenses) {
+            if (!expense.isSettled()) { // Only consider unsettled expenses
+                Optional<User> debtor = UserRepository.findById(expense.getUserId());
+                debtor.ifPresent(user -> {
+                    amountsOwed.put(user.getEmail(), amountsOwed.getOrDefault(user.getEmail(), 0.0) + expense.getAmount().doubleValue());
+                });
+            }
+        }
+
+        return amountsOwed;
+    }
     
 
 }

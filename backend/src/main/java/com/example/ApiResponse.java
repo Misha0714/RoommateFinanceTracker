@@ -11,6 +11,8 @@ public class ApiResponse {
     private User user;
     private Group group;
     private List<Expense> expenses;
+    private Double totalOwed; // New field to store the total amount owed
+
 
     public ApiResponse(String message, User user) {
         this.message = message;
@@ -56,6 +58,14 @@ public class ApiResponse {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public Double getTotalOwed() {
+        return totalOwed;
+    }
+
+    public void setTotalOwed(Double totalOwed) {
+        this.totalOwed = totalOwed;
     }
 }
 

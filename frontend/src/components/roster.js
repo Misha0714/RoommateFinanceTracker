@@ -14,7 +14,7 @@ const guestMember = [
 const groupName = "A";
 
 
-const Roster = (guestStatus) => {
+const Roster = (guestStatus, username, password) => {
   if (guestStatus) {
     return (
       <Box

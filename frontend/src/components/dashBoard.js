@@ -84,7 +84,9 @@ function DashBoard(){
                         <BudgetSummary remainingBudget={50} currentExpenses={20} guestStatus={isGuest} />
                     </Box>
                     <Box sx={{ flex: 1, padding: 2 }}>
-                        <Roster />
+                        <Roster 
+                        username={username}
+                        password={password}/>
           </Box>
                 </Box>
                 
@@ -106,8 +108,6 @@ function DashBoard(){
                 }}>
                     {/* GroupPage button */}
                     <GroupPage
-                        groupId={1}
-                        userId={123}
                         username={username}
                         password={password}
                     />

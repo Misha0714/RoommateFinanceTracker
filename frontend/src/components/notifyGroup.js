@@ -6,36 +6,31 @@ const GroupPage = ({ groupId, userId, username, password }) => {
     const handleSendEmails = async () => {
         try {
             // Fetch group members and their debts from the backend
-            const response = await fetch('http://localhost:8080/api/expenses/group', {
+            const response = await fetch(`http://localhost:8080/api/expenses/owed?username=${username}&password=${password}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
-                params: {
-                    groupName: `group ${groupId}`,
-                    username,
-                    password,
-                },
             });
 
             if (!response.ok) {
-                throw new Error('Failed to fetch group data');
+                throw new Error('Failed to fetch owed data');
             }
 
-            const groupData = await response.json();
-            const { members } = groupData; // Assuming `members` contains the group users and their debts
+            const data = await response.json();
+            const { amountsOwed } = data; // Assuming `amountsOwed` is a map of email -> amount
 
-            // Loop through members and send emails
-            for (const member of members) {
-                if (member.username !== username) {
-                    const message = `Hello ${member.name}, you owe ${username} $${member.amountOwed}.`;
-                    sendEmail(message, username, member.email);
-                }
+            // Loop through owed amounts and send emails
+            for (const [email, amount] of Object.entries(amountsOwed)) {
+                const message = `Hello, you owe ${username} $${amount.toFixed(2)}.`;
+                await sendEmail(email, message);
             }
 
             alert('Emails sent successfully to all group members');
-        } catch (error) {
-            console.error('Error sending emails:', error);
-            alert('Error sending emails');
-        } finally {
+        } 
+        catch (error) {
+            console.error('Error sending one or more emails: ', error);
+            alert('Error sending one or more emails');
+        } 
+        finally {
         }
     };
 

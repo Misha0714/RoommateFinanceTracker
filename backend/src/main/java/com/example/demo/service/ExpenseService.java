@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.user.UserRepository;
 import com.example.demo.model.Expense;
 import com.example.demo.repository.ExpenseRepository;
 import com.example.user.User;
@@ -9,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional

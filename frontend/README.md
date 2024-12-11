@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Needed React Libraries and Dependencies
+
+**Note: The Dependencies do not just include React. As mentioned earlier, it is planned to use the Materials UI, ie. MUI, library for the developement and creation of certain web app components. Detailed below are the dependencies you may need to install to get these features to be appliable.**
+
+MUI
+
+Documentation of this library can be found [here](https://mui.com/material-ui/)
+
+**Note: As of currently Nov 22nd, only Material-UI and MUIx Charts Library is in usage in the project (Not JoyUI or Base UI). If there is a switch, let the team know and update the dependencies.**
+
+`npm install @mui/material @mui/x-charts @mui/@emotion/react @emotion/styled`
+
+MUI Icon Library 
+
+`npm install @mui/icons-material`

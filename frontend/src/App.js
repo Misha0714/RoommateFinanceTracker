@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+import LoginForm from './components/LoginForm';
+import Footer from './components/footer'
+import NavBar from "./components/header";
+import BudgetSummary from "./components/budgetSummary";
+import ActivityLog from "./components/activityLog";
+import RegistrationForm  from "./components/registrationForm"
+import ModalForm from "./components/addExpenseForm";
+import DuoLoginForm from "./components/DuoLoginForm";
+import DashBoard from "./components/dashBoard";
+import Roster from "./components/roster";
+import LandingPage from "./LandingPage/LandingPage"
+import ArticlePage from "./ArticlePage/ArticlePage"
+import { Dashboard, Duo } from "@mui/icons-material";
+
+import SigninPage from "./signin/signinPage";
+import SignupPage from "./signup/signupPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<NavBar />}>
+          <Route index element={<LandingPage />} />
+          <Route path="signin" element={<SigninPage />} />
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="dashboard" element={<DashBoard />} />
+          <Route path="blog" element={<ArticlePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -164,6 +165,29 @@ public class UserController {
     public ResponseEntity<List<Payment>> getPaymentsByExpense(@RequestParam Long expenseId) {
         return ResponseEntity.ok(paymentService.getPaymentsByExpenseId(expenseId));
     }
+    
+ // 9. Get Amount Owed to a User
+    @GetMapping("/expenses/owed")
+    public ResponseEntity<ApiResponse> getAmountsOwedToUser(@RequestParam String username,
+                                                            @RequestParam String password) {
+        Optional<User> user = userService.findByUsername(username);
+        if (user.isPresent() && user.get().getPassword().equals(password)) {
+            Long userId = user.get().getId().longValue();
+
+            // Fetch amounts owed along with emails
+            Map<String, Double> amountsOwed = expenseService.getAmountsOwedToUserWithEmails(userId);
+
+            ApiResponse response = new ApiResponse("Amounts owed to user fetched successfully");
+            response.setUser(user.get());
+            response.setAmountsOwed(amountsOwed); // Include the email -> amount map in the response
+
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse("Invalid credentials"));
+    }
+
+
+
     
 }
 

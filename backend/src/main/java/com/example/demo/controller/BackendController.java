@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
-public class UserController {
+public class BackendController {
     private UserService userService = null;
     private ExpenseService expenseService = null;
     private PaymentService paymentService = null;
@@ -35,19 +35,13 @@ public class UserController {
 
  // 1. Register User
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse> registerUser(@RequestParam String username,
-                                                    @RequestParam String email,
-                                                    @RequestParam String password) {
-        if (userService.findByUsername(username).isPresent()) {
+    public ResponseEntity<ApiResponse> registerUser(@RequestBody User user) {
+        if (userService.findByUsername(user.getUsername()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new ApiResponse("Username already exists: " + username));
+                    .body(new ApiResponse("Username already exists: " + user.getUsername()));
         }
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setEmail(email);
-        newUser.setPassword(password);
 
-        User registeredUser = userService.register(newUser);
+        User registeredUser = userService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ApiResponse("User registered successfully", registeredUser));
     }

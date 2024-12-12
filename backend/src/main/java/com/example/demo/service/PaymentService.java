@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Payment;
-import com.example.user.User;
 import com.example.demo.model.Expense;
 import com.example.demo.repository.PaymentRepository;
+import com.example.demo.user.User;
 import com.example.demo.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,17 +16,17 @@ import java.math.BigDecimal;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final ExpenseRepository expenseRepository;
-    private final User currentUser;  // renamed for clarity
+  //  private final User currentUser;  // renamed for clarity
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository, User currentUser) {
+    public PaymentService(PaymentRepository paymentRepository, ExpenseRepository expenseRepository) {   //, User currentUser) {
         this.paymentRepository = paymentRepository;
         this.expenseRepository = expenseRepository;
-        this.currentUser = currentUser;
+       // this.currentUser = currentUser;
     }
 
     public Payment createPayment(Payment payment) {
-        payment.setPayerId(currentUser.getId().longValue());
+       // payment.setPayerId(currentUser.getId().longValue());
         
         // Set payment date to now
         payment.setPaymentDate(LocalDate.now());

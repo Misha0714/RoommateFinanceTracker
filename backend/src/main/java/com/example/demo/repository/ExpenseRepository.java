@@ -11,7 +11,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findByUserId(Long userId);
     List<Expense> findByGroupId(Long groupId);
     List<Expense> findByPayerId(Long payerId);
-    List<Expense> findByIsRecurringTrueAndDueDateBefore(LocalDate dueDate);
     List<Expense> findByDueDateBetweenAndSettledFalse(LocalDate startDate, LocalDate endDate);
     List<Expense> findBySettledFalse();
 }

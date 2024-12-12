@@ -1,8 +1,8 @@
 package com.example;
 
-import com.example.group.Group;
-import com.example.user.User;
+import com.example.demo.group.Group;
 import com.example.demo.model.Expense;
+import com.example.demo.user.User;
 
 import java.util.List;
 import java.util.Map;

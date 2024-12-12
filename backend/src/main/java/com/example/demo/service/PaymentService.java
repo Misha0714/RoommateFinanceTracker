@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Payment;
 import com.example.demo.model.Expense;
 import com.example.demo.repository.PaymentRepository;
-import com.example.demo.user.User;
+//import com.example.demo.user.User;
 import com.example.demo.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

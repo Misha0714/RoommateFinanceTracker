@@ -3,10 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.model.Expense;
 import com.example.demo.model.Payment;
 import com.example.demo.model.LoginRequest;
-import com.example.user.User;
-import com.example.user.UserService;
 import com.example.demo.service.ExpenseService;
 import com.example.demo.service.PaymentService;
+import com.example.demo.user.User;
+import com.example.demo.user.UserService;
 import com.example.ApiResponse;
 
 import org.springframework.http.HttpStatus;
@@ -21,30 +21,30 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class BackendController {
     private UserService userService = null;
     private ExpenseService expenseService = null;
     private PaymentService paymentService = null;
 
-    public UserController(UserService userService, ExpenseService expenseService, PaymentService paymentService) {
+    public BackendController(UserService userService, ExpenseService expenseService, PaymentService paymentService) {
         this.userService = userService;
         this.expenseService = expenseService;
         this.paymentService = paymentService;
     }
 
- // 1. Register User
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> registerUser(@RequestBody User user) {
         if (userService.findByUsername(user.getUsername()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new ApiResponse("Username already exists: " + user.getUsername()));
         }
-
         User registeredUser = userService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ApiResponse("User registered successfully", registeredUser));
     }
+    
+    
 
     // 2. Login User
     @PostMapping("/login")
@@ -57,6 +57,10 @@ public class BackendController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse("Invalid credentials"));
     }
 
+    
+    
+    
+    
  // 3. Create Expense
     @PostMapping("/expense")
     public ResponseEntity<Expense> createExpense(@RequestParam String creatorUsername,
@@ -159,7 +163,7 @@ public class BackendController {
     public ResponseEntity<List<Payment>> getPaymentsByExpense(@RequestParam Long expenseId) {
         return ResponseEntity.ok(paymentService.getPaymentsByExpenseId(expenseId));
     }
-    
+  /*  
  // 9. Get Amount Owed to a User
     @GetMapping("/expenses/owed")
     public ResponseEntity<ApiResponse> getAmountsOwedToUser(@RequestParam String username,
@@ -179,7 +183,7 @@ public class BackendController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse("Invalid credentials"));
     }
-
+*/
 
 
     

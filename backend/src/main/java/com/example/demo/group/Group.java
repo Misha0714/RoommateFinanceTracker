@@ -1,9 +1,9 @@
-package com.example.group;
+package com.example.demo.group;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-import com.example.user.User;
+import com.example.demo.user.User;
 
 import jakarta.persistence.*;
 

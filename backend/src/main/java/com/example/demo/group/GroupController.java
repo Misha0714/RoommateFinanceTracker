@@ -1,4 +1,4 @@
-package com.example.group;
+package com.example.demo.group;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.ApiResponse;
-import com.example.user.User;
-import com.example.user.UserService;
+import com.example.demo.user.User;
+import com.example.demo.user.UserService;
 
 @RestController
 @RequestMapping("/group")

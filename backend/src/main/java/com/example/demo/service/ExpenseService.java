@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.group.Group;
 import com.example.demo.model.Expense;
 import com.example.demo.repository.ExpenseRepository;
-import com.example.demo.user.User;
+//import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
-import com.example.demo.user.UserService;
-import com.example.group.Group;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

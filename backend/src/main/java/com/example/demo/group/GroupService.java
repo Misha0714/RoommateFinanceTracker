@@ -1,13 +1,14 @@
-package com.example.group;
+package com.example.demo.group;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.user.User;
+import com.example.demo.user.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
-
-import com.example.user.User;
-import com.example.user.UserRepository;
 
 
 @Service

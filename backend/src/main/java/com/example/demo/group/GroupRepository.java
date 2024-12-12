@@ -1,4 +1,4 @@
-package com.example.group;
+package com.example.demo.group;
 
 import java.util.Optional;
 

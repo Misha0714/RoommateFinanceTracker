@@ -1,4 +1,4 @@
-package com.example.group;
+package com.example.demo.group;
 
 public class CreateGroupRequest {
     private Integer owner_id;

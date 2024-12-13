@@ -14,6 +14,7 @@ public class ApiResponse {
     private List<Expense> expenses;
     private Double totalOwed; // New field to store the total amount owed
     private Map<String, Double> amountsOwed; // New field for email -> amount owed map
+    private List<Group> groups;
 
 
     public ApiResponse(String message, User user) {
@@ -77,4 +78,13 @@ public class ApiResponse {
     public void setAmountsOwed(Map<String, Double> amountsOwed) {
         this.amountsOwed = amountsOwed;
     }
+    
+    public List<Group> getGroups(){
+    	return groups;
+    }
+    
+    public void setGroups(List<Group> groups) {
+    	this.groups = groups;
+    }
+    
 }

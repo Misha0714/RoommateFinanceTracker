@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.group.Group;
 import com.example.demo.model.Expense;
 import com.example.demo.model.Payment;
 import com.example.demo.model.LoginRequest;
@@ -46,17 +47,17 @@ public class BackendController {
     
     
 
-    // 2. Login User
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> loginUser(@RequestParam String username,
-                                                 @RequestParam String password) {
-        Optional<User> user = userService.findByUsername(username);
-        if (user.isPresent() && user.get().getPassword().equals(password)) {
-            return ResponseEntity.ok(new ApiResponse("Login successful", user.get()));
+    public ResponseEntity<ApiResponse> loginUser(@RequestBody User user) {
+        Optional<User> existingUser = userService.findByUsername(user.getUsername());
+        
+        if (existingUser.isPresent() && existingUser.get().getPassword().equals(user.getPassword())) {
+            return ResponseEntity.ok(new ApiResponse("Login successful", existingUser.get()));
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse("Invalid credentials"));
+        
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ApiResponse("Invalid credentials"));
     }
-
     
     
     
@@ -79,6 +80,9 @@ public class BackendController {
                 expense.setPayerId(payer.get().getId().longValue());
                 expense.setDescription(description);
                 expense.setCategory(category);
+                
+                
+                //change amount  to send to expense splitting logic
                 expense.setAmount(amount);
                 expense.setDueDate(LocalDate.parse(dueDate));
                 Expense createdExpense = expenseService.createExpense(expense);
@@ -163,7 +167,7 @@ public class BackendController {
     public ResponseEntity<List<Payment>> getPaymentsByExpense(@RequestParam Long expenseId) {
         return ResponseEntity.ok(paymentService.getPaymentsByExpenseId(expenseId));
     }
-  /*  
+ 
  // 9. Get Amount Owed to a User
     @GetMapping("/expenses/owed")
     public ResponseEntity<ApiResponse> getAmountsOwedToUser(@RequestParam String username,
@@ -183,7 +187,23 @@ public class BackendController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse("Invalid credentials"));
     }
-*/
+    
+ // 10. Get All Groups for a User
+    @GetMapping("/groups/user")
+    public ResponseEntity<ApiResponse> getGroupsForUser(@RequestParam String username,
+                                                        @RequestParam String password) {
+        Optional<User> user = userService.findByUsername(username);
+        if (user.isPresent() && user.get().getPassword().equals(password)) {
+            List<Group> groups = user.get().getGroups(); // Assuming User has a relationship with Group
+            ApiResponse response = new ApiResponse("Groups fetched successfully");
+            response.setUser(user.get());
+            response.setGroups(groups); // Add groups to the response
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse("Invalid credentials"));
+    }
+    
+    
 
 
     

@@ -3,11 +3,13 @@ package com.example.demo.service;
 import com.example.demo.group.Group;
 import com.example.demo.model.Expense;
 import com.example.demo.repository.ExpenseRepository;
+import com.example.demo.user.User;
 //import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -21,15 +23,15 @@ import java.util.stream.Collectors;
 @Transactional
 public class ExpenseService {
     private final ExpenseRepository expenseRepository;
-    //private final UserService userService;  
+    private final UserRepository userRepository;  
     //private final Group currentGroup;
 
 
     
     @Autowired
-    public ExpenseService(ExpenseRepository expenseRepository) {   //, UserService userService, Group currentGroup) {
-        this.expenseRepository = expenseRepository;
-       // this.userService = userService;
+    public ExpenseService(ExpenseRepository expenseRepository, UserRepository userRepository) {   //, UserService userService, Group currentGroup) {
+       this.expenseRepository = expenseRepository;
+       this.userRepository = userRepository;
        // this.currentGroup = currentGroup;
     }
 
@@ -55,20 +57,22 @@ public class ExpenseService {
         expenseRepository.deleteById(id);
     }
 
-  /*      // Get all expenses where others owe the specified user
-    // Get all expenses where others owe the specified user, along with their emails
     public Map<String, Double> getAmountsOwedToUserWithEmails(Long userId) {
         List<Expense> expenses = expenseRepository.findByPayerId(userId);
-
+    
         // Map to store email -> total amount owed
         Map<String, Double> amountsOwed = new HashMap<>();
-
+    
         for (Expense expense : expenses) {
             if (!expense.isSettled()) { // Only consider unsettled expenses
                 if (expense.getUserId() != null) {
-                    // Assuming the `User` object can fetch details by ID
-                    if (expense.getUserId().equals(currentUser.getId())) {
-                        String email = currentUser.getEmail();
+					// Use UserRepository to fetch the user
+                    Integer userIdAsInteger = expense.getUserId().intValue();                	
+                    Optional<User> userOptional = userRepository.findById(userIdAsInteger);
+                    
+                    if (userOptional.isPresent()) {
+                        User user = userOptional.get();
+                        String email = user.getEmail();
                         amountsOwed.put(
                             email,
                             amountsOwed.getOrDefault(email, 0.0) + expense.getAmount().doubleValue()
@@ -77,9 +81,9 @@ public class ExpenseService {
                 }
             }
         }
-
+    
         return amountsOwed;
-    }*/
+    }
     
 
 }

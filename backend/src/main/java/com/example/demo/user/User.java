@@ -3,6 +3,11 @@ package com.example.demo.user;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+
+import java.util.List;
+
+import com.example.demo.group.Group;
+
 import jakarta.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
@@ -21,6 +26,9 @@ public class User {
   
   //@Column(nullable = false)
   private String password;
+  
+  @ManyToMany(mappedBy = "users")
+  private List<Group> groups;
   
   public User() {
 	  
@@ -57,4 +65,13 @@ public class User {
 	  
     this.password = password;
   }
+  
+  public List<Group> getGroups(){
+	  return groups;
+  }
+  
+  public void setGroups(List<Group> groups) {
+	  this.groups = groups;
+  }
+  
 }
